@@ -1,0 +1,10 @@
+pyautogui
+os
+requests
+json
+win10toast
+time
+requests
+json
+gtts
+win32com.client
