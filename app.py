@@ -12,7 +12,7 @@ import win32com.client
 
 PATH = '/Users/Home/Desktop/code/TestMO2'
 ID = f'{PATH}/1.jpeg'
-API = 'XXXXXXXXX'
+API = 'K81039540788957'
 LANG = 'en'
 
 
@@ -55,7 +55,7 @@ while True:
         myScreenshot.save(ID)
         try:
             ocr_space_file(filename=ID, language='eng')
-            time.sleep(10)
+            time.sleep(50)
             continue
         except Exception as e:
             print(e)
@@ -67,7 +67,7 @@ while True:
         myScreenshot.save(ID)
         try:
             ocr_space_file(filename=ID, language='eng')
-            time.sleep(10)
+            time.sleep(50)
             continue
         except Exception as e:
             print(e)
