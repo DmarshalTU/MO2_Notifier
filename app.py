@@ -6,11 +6,15 @@ from win10toast import ToastNotifier
 import time
 import requests
 import json
+from gtts import gTTS
+import win32com.client
 
 
-PATH = '/Users/Home/Desktop/code/TestMO2' # change if u need to
+PATH = '/Users/Home/Desktop/code/TestMO2'
 ID = f'{PATH}/1.jpeg'
-API = 'Get from OCR.SPACE'
+API = 'XXXXXXXXX'
+LANG = 'en'
+
 
 def ocr_space_file(filename, overlay=False, api_key=API, language='eng'):
 
@@ -26,11 +30,13 @@ def ocr_space_file(filename, overlay=False, api_key=API, language='eng'):
     m = r.content.decode()
     jsonstr = json.loads(m)
     txt = jsonstr["ParsedResults"][0]["ParsedText"]
-    # noty(txt)
     q = [int(s) for s in txt.split() if s.isdigit()]
     w = q[0]
+    speaker = win32com.client.Dispatch("SAPI.SpVoice")
+    speaker.Speak(f'Your position is {str(w)}')
     if(w == 10):
         noty(str(w))
+        speaker.Speak(f'Attention! {str(w)} left!')
     
 
 def noty(msg):
@@ -49,7 +55,8 @@ while True:
         myScreenshot.save(ID)
         try:
             ocr_space_file(filename=ID, language='eng')
-            time.sleep(600)
+            time.sleep(10)
+            continue
         except Exception as e:
             print(e)
 
@@ -60,6 +67,7 @@ while True:
         myScreenshot.save(ID)
         try:
             ocr_space_file(filename=ID, language='eng')
-            time.sleep(600)
+            time.sleep(10)
+            continue
         except Exception as e:
             print(e)
